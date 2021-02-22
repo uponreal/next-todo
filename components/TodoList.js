@@ -1,6 +1,22 @@
+import { useCallback, useMemo } from "react";
 import palette from "../theme/palette";
 
+
 const TodoList = ({todos}) => {
+    const getTodoColorCount = useCallback(() => {
+        let colorCount = {};
+        todos.forEach((todo) => {
+            if(colorCount[todo.color] === undefined) {
+            colorCount[todo.color] = 1;
+            } else {
+            colorCount[todo.color]++;
+            }
+        });
+        return colorCount;
+    }, [todos]);
+
+    const todoColorCount = useMemo(getTodoColorCount, [todos]);
+
     return (
         <>
             <div className="container">
@@ -26,7 +42,7 @@ const TodoList = ({todos}) => {
                 }  
             `}</style>
         </>
-    )
+    );
 }
 
 export default TodoList;
