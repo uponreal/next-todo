@@ -1,6 +1,6 @@
 import palette from "../theme/palette";
 
-export default ({todos}) => {
+const TodoList = ({todos}) => {
     return (
         <>
             <div className="container">
@@ -28,3 +28,5 @@ export default ({todos}) => {
         </>
     )
 }
+
+export default TodoList;

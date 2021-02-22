@@ -9,8 +9,10 @@ const todos = [
   { id: 6, text: "분리수거 하기", color: "navy", checked: false },
 ];
 
-export default () => {
+const App = () => {
   return (
     <TodoList todos={todos}/>
   )
 }
+
+export default App;

@@ -1,6 +1,6 @@
 import palette from "../theme/palette";
 
-export default () => {
+const Header = () => {
     return (
         <>
             <div className="container">
@@ -22,3 +22,5 @@ export default () => {
         </>
     )
 }
+
+export default Header;
