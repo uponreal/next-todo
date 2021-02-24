@@ -21,7 +21,7 @@ export async function getServerSideProps() {
 }
 
 const App = ({ todos }) => {
-  const { data, error } = useSWR("getTodos", async () => {
+  const { data, error, mutate } = useSWR("getTodos", async () => {
     const result = await getTodos();
     return result.data;
   });
@@ -29,7 +29,7 @@ const App = ({ todos }) => {
   if (data !== undefined) {
     todos = data;
   }
-  return <TodoList todos={todos} />;
+  return <TodoList todos={todos} todoMutate={mutate} />;
 };
 
 export default App;

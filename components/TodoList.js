@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from "react";
 import palette from "../theme/palette";
 import { FaRegCircle, FaTrashAlt, FaUndo } from "react-icons/fa";
+import { putTodos } from "../lib/api/todo";
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, todoMutate }) => {
   const getTodoColorCount = useCallback(() => {
     let colorCount = {};
     todos.forEach((todo) => {
@@ -62,7 +63,16 @@ const TodoList = ({ todos }) => {
                       <FaUndo
                         color={palette.navy}
                         size={22}
-                        onClick={() => console.log("click undo button")}
+                        onClick={async () => {
+                          try {
+                            const response = await putTodos(todo.id);
+                            const todos = response.data;
+                            todoMutate(todos, false);
+                          } catch (e) {
+                            console.log(e);
+                            alert("오류가 발생하였습니다.");
+                          }
+                        }}
                         style={{ marginLeft: 12 }}
                       />
                     </>
@@ -70,7 +80,16 @@ const TodoList = ({ todos }) => {
                     <FaRegCircle
                       color={palette.gray}
                       size={24}
-                      onClick={() => console.log("click done button")}
+                      onClick={async () => {
+                        try {
+                          const response = await putTodos(todo.id);
+                          const todos = response.data;
+                          todoMutate(todos, false);
+                        } catch (e) {
+                          console.log(e);
+                          alert("오류가 발생하였습니다.");
+                        }
+                      }}
                     />
                   )}
                 </div>
@@ -141,6 +160,9 @@ const TodoList = ({ todos }) => {
           display: flex;
           align-items: center;
           padding-right: 12px;
+        }
+        .todo-list__item__right-side :global(svg) {
+          cursor: pointer;
         }
         .bg-blue {
           background-color: ${palette.blue};
