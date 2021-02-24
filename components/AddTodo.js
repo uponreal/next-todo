@@ -1,17 +1,35 @@
 import { useState } from "react";
 import { BiBrush, BiCheck } from "react-icons/bi";
+import { addTodo } from "../client-lib/api/todo";
 import palette from "../theme/palette";
+import { useCallback } from "react";
+import { useRouter } from "next/router";
 
-const AddTodo = () => {
+const AddTodo = ({ todoMutate }) => {
   const [text, setText] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const router = useRouter();
+  const clickButton = useCallback(async () => {
+    if (text === "") {
+      alert("Todo 내용을 입력해주세요.");
+    } else if (selectedColor === "") {
+      alert("Todo 색상을 선택해주세요.");
+    } else {
+      const response = await addTodo(text, selectedColor);
+      const todos = response.data;
+      todoMutate(todos, false);
+      router.push("/");
+    }
+  }, [text, selectedColor]);
 
   return (
     <>
       <div className="container">
         <div className="header">
           <h1 className="header__title">Add Todo</h1>
-          <button className="header__add-button">추가하기</button>
+          <button className="header__add-button" onClick={clickButton}>
+            추가하기
+          </button>
         </div>
         <div className="colors-wrapper">
           <div className="colors_wrapper__color-list">
