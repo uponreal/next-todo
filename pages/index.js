@@ -1,5 +1,5 @@
 import TodoList from "../components/TodoList.js";
-import { getTodos } from "../lib/api/todo";
+import { getTodos } from "../client-lib/api/todo";
 import useSWR from "swr";
 
 export async function getServerSideProps() {

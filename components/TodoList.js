@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import palette from "../theme/palette";
 import { FaRegCircle, FaTrashAlt, FaUndo } from "react-icons/fa";
-import { toogleCheckTodo, deleteTodo } from "../lib/api/todo";
+import { toogleCheckTodo, deleteTodo } from "../client-lib/api/todo";
 
 const TodoList = ({ todos, todoMutate }) => {
   const getTodoColorCount = useCallback(() => {
