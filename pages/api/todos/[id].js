@@ -1,4 +1,4 @@
-import data from "../../../lib/data/index";
+import data from "../../../server-lib/data/index";
 
 export default (req, res) => {
   if (req.method === "PUT") {
