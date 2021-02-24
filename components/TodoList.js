@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import palette from "../theme/palette";
 import { FaRegCircle, FaTrashAlt, FaUndo } from "react-icons/fa";
-import { putTodos, deleteTodos } from "../lib/api/todo";
+import { toogleCheckTodo, deleteTodo } from "../lib/api/todo";
 
 const TodoList = ({ todos, todoMutate }) => {
   const getTodoColorCount = useCallback(() => {
@@ -59,7 +59,7 @@ const TodoList = ({ todos, todoMutate }) => {
                         color={palette.red}
                         size={22}
                         onClick={async () => {
-                          const response = await deleteTodos(todo.id);
+                          const response = await deleteTodo(todo.id);
                           const todos = response.data;
                           todoMutate(todos, false);
                         }}
@@ -69,7 +69,7 @@ const TodoList = ({ todos, todoMutate }) => {
                         size={22}
                         onClick={async () => {
                           try {
-                            const response = await putTodos(todo.id);
+                            const response = await toogleCheckTodo(todo.id);
                             const todos = response.data;
                             todoMutate(todos, false);
                           } catch (e) {
@@ -86,7 +86,7 @@ const TodoList = ({ todos, todoMutate }) => {
                       size={24}
                       onClick={async () => {
                         try {
-                          const response = await putTodos(todo.id);
+                          const response = await toogleCheckTodo(todo.id);
                           const todos = response.data;
                           todoMutate(todos, false);
                         } catch (e) {
