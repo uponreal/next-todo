@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import palette from "../theme/palette";
 import { FaRegCircle, FaTrashAlt, FaUndo } from "react-icons/fa";
-import { putTodos } from "../lib/api/todo";
+import { putTodos, deleteTodos } from "../lib/api/todo";
 
 const TodoList = ({ todos, todoMutate }) => {
   const getTodoColorCount = useCallback(() => {
@@ -58,7 +58,11 @@ const TodoList = ({ todos, todoMutate }) => {
                       <FaTrashAlt
                         color={palette.red}
                         size={22}
-                        onClick={() => console.log("click delete button")}
+                        onClick={async () => {
+                          const response = await deleteTodos(todo.id);
+                          const todos = response.data;
+                          todoMutate(todos, false);
+                        }}
                       />
                       <FaUndo
                         color={palette.navy}
