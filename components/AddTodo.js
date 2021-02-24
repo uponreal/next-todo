@@ -1,7 +1,11 @@
-import { BiBrush } from "react-icons/bi";
+import { useState } from "react";
+import { BiBrush, BiCheck } from "react-icons/bi";
 import palette from "../theme/palette";
 
 const AddTodo = () => {
+  const [text, setText] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+
   return (
     <>
       <div className="container">
@@ -14,15 +18,25 @@ const AddTodo = () => {
             {["red", "orange", "yellow", "green", "blue", "navy"].map(
               (color, index) => (
                 <div
-                  className={`colors_wrapper__color-button bg-${color}`}
+                  className={`colors_wrapper__color-button bg-${color} ${
+                    selectedColor === color ? "selected-color" : ""
+                  }`}
                   key={index}
-                />
+                  onClick={() => setSelectedColor(color)}
+                >
+                  {selectedColor === color ? <BiCheck size={22} /> : ""}
+                </div>
               )
             )}
           </div>
           <BiBrush size={25} />
         </div>
-        <textarea className="input-todo" placeholder="할 일을 입력해주세요." />
+        <textarea
+          className="input-todo"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="할 일을 입력해주세요."
+        />
       </div>
       <style jsx>
         {`
@@ -60,9 +74,16 @@ const AddTodo = () => {
             height: 24px;
             border-radius: 50%;
             margin-right: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           .colors_wrapper__color-button:last-child {
             margin: 0;
+          }
+          .selected-color {
+            border: 2px solid black;
           }
           .bg-blue {
             background-color: ${palette.blue};
