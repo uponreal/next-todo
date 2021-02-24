@@ -10,9 +10,7 @@ const todos = [
 ];
 
 const App = () => {
-  return (
-    <TodoList todos={todos}/>
-  )
-}
+  return <TodoList todos={todos} />;
+};
 
 export default App;
