@@ -35,6 +35,19 @@ const TodoList = ({todos}) => {
                         })}
                     </div>
                 </div>
+                <ul className="todo-list">
+                    {todos.map((todo) => {
+                        return (
+                            <li className="todo-list__item" key={todo.id}>
+                                <div className="todo-list__item__left-side">
+                                    <div className={`todo-list__item__block bg-${todo.color}`}></div>
+                                    <p className={`todo-list__item__text ${todo.checked === true ? "checked-text" : ""}`}>{todo.text}</p></div>
+                                <div className="todo-right-side">
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
             <style jsx>{`
                 .container {
@@ -42,7 +55,7 @@ const TodoList = ({todos}) => {
                 }
                 .header {
                     padding: 12px;
-                    border-bottom: 1px solid ${palette.gray}
+                    border-bottom: 1px solid ${palette.gray};
                 }
                 .header__last-todo {
                     font-size: 14px;
@@ -62,6 +75,34 @@ const TodoList = ({todos}) => {
                     width: 16px;
                     height: 16px;
                     border-radius: 50%;
+                }
+                .todo-list{
+                    padding: 0;
+                    margin: 0;
+                }
+                .todo-list__item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 52px;
+                    border-bottom: 1px solid ${palette.gray};
+                }
+                .todo-list__item__left-side {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+                .todo-list__item__block {
+                    width: 12px;
+                    height: 100%;
+                }
+                .todo-list__item__text {
+                    font-size: 16px;
+                    margin-left: 12px;
+                }
+                .checked-text {
+                    color: ${palette.gray};
+                    text-decoration: line-through;
                 }
                 .bg-blue {
                     background-color: ${palette.blue};
