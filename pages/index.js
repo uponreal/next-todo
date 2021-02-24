@@ -3,12 +3,21 @@ import { getTodos } from "../lib/api/todo";
 import useSWR from "swr";
 
 export async function getServerSideProps() {
-  const result = await getTodos();
-  return {
-    props: {
-      todos: result.data,
-    },
-  };
+  try {
+    const result = await getTodos();
+    return {
+      props: {
+        todos: result.data,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      props: {
+        todos: [],
+      },
+    };
+  }
 }
 
 const App = ({ todos }) => {
