@@ -1,4 +1,5 @@
 import data from "../../../server-lib/data/index";
+import { v4 as uuid } from "uuid";
 
 export default (req, res) => {
   if (req.method === "GET") {
@@ -15,7 +16,7 @@ export default (req, res) => {
       const { text, color } = req.body;
       const todos = data.todo.getTodos();
       const changedTodos = [
-        { id: todos.length, text, color, checked: false },
+        { id: uuid(), text, color, checked: false },
         ...todos,
       ];
       data.todo.saveTodos(changedTodos);

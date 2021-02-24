@@ -3,7 +3,7 @@ import data from "../../../server-lib/data/index";
 export default (req, res) => {
   if (req.method === "PUT") {
     try {
-      const id = Number(req.query.id);
+      const id = req.query.id;
       const isExist = data.todo.checkExist(id);
       if (!isExist) {
         return res
@@ -28,7 +28,7 @@ export default (req, res) => {
     }
   } else if (req.method === "DELETE") {
     try {
-      const id = Number(req.query.id);
+      const id = req.query.id;
       const isExist = data.todo.checkExist(id);
       if (!isExist) {
         return res
