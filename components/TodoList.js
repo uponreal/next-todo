@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react";
 import palette from "../theme/palette";
+import { FaRegCircle, FaTrashAlt, FaUndo } from "react-icons/fa";
 
 const TodoList = ({ todos }) => {
   const getTodoColorCount = useCallback(() => {
@@ -50,8 +51,28 @@ const TodoList = ({ todos }) => {
                     {todo.text}
                   </p>
                 </div>
-                <div className="todo-right-side">
-                  {todo.checked === true ? "" : ""}
+                <div className="todo-list__item__right-side">
+                  {todo.checked === true ? (
+                    <>
+                      <FaTrashAlt
+                        color={palette.red}
+                        size={22}
+                        onClick={() => console.log("click delete button")}
+                      />
+                      <FaUndo
+                        color={palette.navy}
+                        size={22}
+                        onClick={() => console.log("click undo button")}
+                        style={{ marginLeft: 12 }}
+                      />
+                    </>
+                  ) : (
+                    <FaRegCircle
+                      color={palette.gray}
+                      size={24}
+                      onClick={() => console.log("click done button")}
+                    />
+                  )}
                 </div>
               </li>
             );
@@ -78,12 +99,14 @@ const TodoList = ({ todos }) => {
         }
         .header__color {
           display: flex;
+          align-items: center;
           margin-right: 8px;
         }
         .header__round-color {
           width: 16px;
           height: 16px;
           border-radius: 50%;
+          margin-right: 6px;
         }
         .todo-list {
           padding: 0;
@@ -112,6 +135,12 @@ const TodoList = ({ todos }) => {
         .checked-text {
           color: ${palette.gray};
           text-decoration: line-through;
+        }
+        .todo-list__item__right-side {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding-right: 12px;
         }
         .bg-blue {
           background-color: ${palette.blue};
