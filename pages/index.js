@@ -21,10 +21,14 @@ export async function getServerSideProps() {
 }
 
 const App = ({ todos }) => {
-  const { data, error, mutate } = useSWR("getTodos", async () => {
-    const result = await getTodos();
-    return result.data;
-  });
+  const { data, error, mutate } = useSWR(
+    "getTodos",
+    async () => {
+      const result = await getTodos();
+      return result.data;
+    },
+    { initialData: todos }
+  );
   if (error) return <div>failed to load</div>;
   if (data !== undefined) {
     todos = data;
